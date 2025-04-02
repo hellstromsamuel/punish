@@ -4,11 +4,16 @@ import {
   ThemeProvider,
 } from "@react-navigation/native";
 import { Stack } from "expo-router";
-import { useColorScheme } from "react-native";
+import React from "react";
+import { Appearance, useColorScheme } from "react-native";
 import "react-native-reanimated";
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
+
+  React.useEffect(() => {
+    Appearance.setColorScheme("dark");
+  }, []);
 
   return (
     <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>

@@ -1,5 +1,5 @@
 import { SectionList, StyleSheet } from "react-native";
-import { Text, View } from "../Themed";
+import { Text, View, useThemeColor } from "../Themed";
 import FineAmountBadge from "./FineAmountBadge";
 import { IFine } from "../../interfaces/IFine";
 
@@ -8,6 +8,8 @@ export default function FinesList({
 }: {
   fines: { title: string; data: IFine[] }[];
 }) {
+  const cardColor = useThemeColor({}, "card");
+
   return (
     <SectionList
       sections={fines}
@@ -18,7 +20,9 @@ export default function FinesList({
         </View>
       )}
       renderSectionHeader={({ section }) => (
-        <Text style={styles.sectionHeader}>{section.title}</Text>
+        <Text style={{ ...styles.sectionHeader, backgroundColor: cardColor }}>
+          {section.title}
+        </Text>
       )}
       keyExtractor={(item) => item.id}
     />
@@ -33,7 +37,6 @@ const styles = StyleSheet.create({
     paddingBottom: 2,
     fontSize: 16,
     fontWeight: "bold",
-    backgroundColor: "rgba(247,247,247,1.0)",
   },
   item: {
     padding: 10,

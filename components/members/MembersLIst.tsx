@@ -1,6 +1,6 @@
 import { SectionList, StyleSheet } from "react-native";
 import { IMember } from "../../interfaces/IMember";
-import { Text, View } from "../Themed";
+import { Text, View, useThemeColor } from "../Themed";
 import FineAmountBadge from "../fines/FineAmountBadge";
 
 export default function MembersList({
@@ -8,6 +8,8 @@ export default function MembersList({
 }: {
   members: { title: string; data: IMember[] }[];
 }) {
+  const cardColor = useThemeColor({}, "card");
+
   return (
     <SectionList
       sections={members}
@@ -18,7 +20,9 @@ export default function MembersList({
         </View>
       )}
       renderSectionHeader={({ section }) => (
-        <Text style={styles.sectionHeader}>{section.title}</Text>
+        <Text style={{ ...styles.sectionHeader, backgroundColor: cardColor }}>
+          {section.title}
+        </Text>
       )}
       keyExtractor={(item) => item.id}
     />
@@ -36,7 +40,6 @@ const styles = StyleSheet.create({
     paddingBottom: 2,
     fontSize: 16,
     fontWeight: "bold",
-    backgroundColor: "rgba(247,247,247,1.0)",
   },
   item: {
     padding: 10,
